@@ -97,7 +97,20 @@ The order total is always computed on the server from current menu prices; any c
 | --- | --- |
 | `NEXT_PUBLIC_API_URL` | `https://api.example.com` |
 
-**API (any PHP 8.3+ host):** point the web root at `backend/public`, run `composer install --no-dev --optimize-autoloader`, `php artisan migrate --force` and `php artisan config:cache`. Use a managed database (MySQL or Postgres) rather than SQLite on hosts with an ephemeral disk.
+**API on Render (free, Docker):** `backend/Dockerfile` and `backend/docker-start.sh` run the API. The live demo API is at `https://tavola-api-0lvc.onrender.com`. It was created with:
+
+```bash
+render services create --name tavola-api --type web_service --runtime docker \
+  --repo https://github.com/AviNormie/tavola --branch main --root-directory backend \
+  --plan free --region frankfurt --health-check-path /up \
+  --env-var APP_ENV=production --env-var APP_DEBUG=false --env-var LOG_CHANNEL=stderr \
+  --env-var CACHE_STORE=array --env-var SESSION_DRIVER=array --env-var QUEUE_CONNECTION=sync \
+  --env-var CORS_ALLOWED_ORIGINS=https://your-frontend.vercel.app
+```
+
+The free plan sleeps after about 15 minutes idle (the first request then takes 30–60 seconds), and the SQLite file is rebuilt and reseeded on every boot, so orders don't survive a restart. After deploying the frontend, set `CORS_ALLOWED_ORIGINS` to its URL in the Render dashboard (Environment).
+
+**API (any other PHP 8.3+ host):** point the web root at `backend/public`, run `composer install --no-dev --optimize-autoloader`, `php artisan migrate --force` and `php artisan config:cache`. Use a managed database (MySQL or Postgres) rather than SQLite on hosts with an ephemeral disk.
 
 | Variable | Example |
 | --- | --- |
