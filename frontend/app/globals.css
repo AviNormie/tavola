@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #faf6ef;
+  --surface: #fffcf6;
+  --ink: #2b2724;
+  --muted: #675f57;
+  --line: #e7decf;
+  --sand: #efe7d8;
+  --terracotta: #b4532a;
+  --terracotta-deep: #8f3f1d;
+  --terracotta-soft: #f6e3d8;
+  --sage: #6f8468;
+  --sage-deep: #43573f;
+  --sage-soft: #e3eadd;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-sand: var(--sand);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-deep: var(--terracotta-deep);
+  --color-terracotta-soft: var(--terracotta-soft);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-sage-soft: var(--sage-soft);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-terracotta text-white hover:bg-terracotta-deep;
+}
+@utility btn-sage {
+  @apply btn bg-sage-deep text-white hover:bg-ink;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-surface text-ink hover:bg-sand;
+}
+@utility field {
+  @apply min-h-11 w-full rounded-lg border border-line bg-surface px-3 text-base text-ink;
+}
