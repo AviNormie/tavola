@@ -3,7 +3,7 @@
 QR menus and ordering for independent restaurants. A small portfolio demo: **Next.js** front end, **Laravel** JSON API, **SQLite**, English and Italian.
 
 Two seeded restaurants (**Trattoria Sole**, Italian by default, and **North Pier Kitchen**, English by default) each have their own menu, tables and orders, so you can see tenant separation by switching slugs.
-
+ 
 ```
 frontend/   Next.js (App Router, TypeScript, Tailwind CSS v4)
 backend/    Laravel API (Eloquent, migrations, seeders, Sanctum tokens, PHPUnit tests)
